@@ -1,0 +1,338 @@
+<pre>
+    FOOD FINDER: PROJECT OVERVIEW    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Ruby program launched from the command line
+        <span class="red">&#8226;</span> Rolodex of our favorite restaurants
+        <span class="green indent01">&#8226;</span> Stored in a text file
+        <span class="red">&#8226;</span> Allows user interaction
+        <span class="red">&#8226;</span> List restaurants
+        <span class="green indent01">&#8226;</span> Name, cuisine, and price
+        <span class="green indent01">&#8226;</span> Sortable
+        <span class="red">&#8226;</span> Add new restaurants to the List
+        <span class="red">&#8226;</span> Find restaurants by keyword
+    </div>
+    FOOD FINDER: DIRECTORY STRUCTURE 
+    <div class="sticky" id="dir-tree">
+    </div>
+    FOOD FINDER: FILES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> init.rb:
+        <div class="code-wrapper indent01">
+        #### Food Finder ####
+        #
+        # Launch this Ruby file from the command line 
+        # to get started.
+        #
+        
+        APP_ROOT = File.dirname(__FILE__)
+        
+        # each of the following will give the same output
+        #require "#{APP_ROOT}/lib/guide"
+        #require File.join(APP_ROOT, 'lib', 'guide.rb')
+        #require File.join(APP_ROOT, 'lib', 'guide')
+        $:.unshift(File.join(APP_ROOT, 'lib'))
+        require 'guide'
+        
+        guide = Guide.new('restaurants.txt')
+        guide.launch!
+        </div>
+        <span class="red">&#8226;</span> restaurants.txt:
+        <div class="code-wrapper indent01">
+        Hot Tamale	Mexican	25
+        Cafe Masala	Indian	30
+        pita pocket	Fast food	10
+        Quick Cup	coffee	5
+        Taste of Little Italy	pizza	10
+        Mallard House	New American	35
+        </div>
+        <span class="red">&#8226;</span> guide.rb:
+        <div class="code-wrapper indent01">
+        require 'restaurant'
+        require 'support/string_extend'
+        class Guide
+            class Config
+                @@actions = ['list', 'find', 'add', 'quit']
+                def self.actions; @@actions; end
+            end
+            
+            def initialize(path=nil)
+                # locate the restaurant text file at path
+                Restaurant.filepath = path
+                if Restaurant.file_usable?
+                    puts "Found restaurant file."
+                # or create a new file
+                elsif Restaurant.create_file
+                    puts "Created restaurant file."
+                # exit if create fails
+                else
+                    puts "Exiting.\n\n"
+                    exit!
+                end
+            end
+        
+            def launch!
+                introduction
+                # action loop
+                result = nil
+                until result == :quit
+                    action, args = get_action
+                    result = do_action(action, args)
+                end
+                conclusion
+            end
+            
+            def get_action
+                action = nil
+                # Keep asking for user input until we get a valid action
+                until Guide::Config.actions.include?(action)
+                    puts "Actions: " + Guide::Config.actions.join(", ")
+                    print "> "
+                    user_response = gets.chomp
+                    args = user_response.downcase.strip.split(' ')
+                    action = args.shift
+                end
+                return action, args
+            end
+            
+            def do_action(action, args=[])
+                case action
+                when 'list'
+                    list(args)
+                when 'find'
+                    keyword = args.shift
+                    find(keyword)
+                when 'add'
+                    add
+                when 'quit'
+                    return :quit
+                else
+                    puts "\nI don't understand that command.\n"
+                end
+            end
+        
+            def list(args=[])
+                sort_order = args.shift
+                sort_order = args.shift if sort_order == 'by'
+                sort_order = "name" unless ['name', 'cuisine', 'price'].include?(sort_order)
+                
+                output_action_header("Listing restaurants")
+                
+                restaurants = Restaurant.saved_restaurants
+                restaurants.sort! do |r1, r2|
+                    case sort_order
+                    when 'name'
+                        r1.name.downcase <=> r2.name.downcase
+                    when 'cuisine'
+                        r1.cuisine.downcase <=> r2.cuisine.downcase
+                    when 'price'
+                        r1.price.to_i <=> r2.price.to_i
+                    end
+                end
+                output_restaurant_table(restaurants)
+                puts "Sort using: 'list cuisine' or 'list by cuisine'\n\n"
+            end
+            
+            def find(keyword="")
+                output_action_header("Find a restaurant")
+                if keyword
+                    restaurants = Restaurant.saved_restaurants
+                    found = restaurants.select do |rest|
+                    rest.name.downcase.include?(keyword.downcase) || 
+                    rest.cuisine.downcase.include?(keyword.downcase) || 
+                    rest.price.to_i <= keyword.to_i
+                    end
+                    output_restaurant_table(found)
+                else
+                    puts "Find using a key phrase to search the restaurant list."
+                    puts "Examples: 'find tamale', 'find Mexican', 'find mex'\n\n"
+                end
+            end
+            
+            def add
+                output_action_header("Add a restaurant")
+                restaurant = Restaurant.build_using_questions
+                if restaurant.save
+                    puts "\nRestaurant Added\n\n"
+                else
+                    puts "\nSave Error: Restaurant not added\n\n"
+                end
+            end
+            
+            def introduction
+                puts "\n\n<<< Welcome to the Food Finder >>>\n\n"
+                puts "This is an interactive guide to help you find the food you crave.\n\n"
+            end
+        
+            def conclusion
+                puts "\n<<< Goodbye and Bon Appetit! >>>\n\n\n"
+            end
+            
+            private
+            
+            def output_action_header(text)
+                puts "\n#{text.upcase.center(60)}\n\n"
+            end
+            
+            def output_restaurant_table(restaurants=[])
+                print " " + "Name".ljust(30)
+                print " " + "Cuisine".ljust(20)
+                print " " + "Price".rjust(6) + "\n"
+                puts "-" * 60
+                restaurants.each do |rest|
+                    line =  " " << rest.name.titleize.ljust(30)
+                    line << " " + rest.cuisine.titleize.ljust(20)
+                    line << " " + rest.formatted_price.rjust(6)
+                    puts line
+                end
+                puts "No listings found" if restaurants.empty?
+                puts "-" * 60
+            end
+            
+        end   
+        </div>
+        <span class="red">&#8226;</span> restaurant.rb:
+        <div class="code-wrapper indent01">
+        require 'support/number_helper'
+        class Restaurant
+            include NumberHelper
+        
+            @@filepath = nil
+            def self.filepath=(path=nil)
+                @@filepath = File.join(APP_ROOT, path)
+            end
+            
+            attr_accessor :name, :cuisine, :price
+            
+            def self.file_exists?
+                # class should know if the restaurant file exists
+                if @@filepath && File.exists?(@@filepath)
+                    return true
+                else
+                    return false
+                end
+            end
+            
+            def self.file_usable?
+                return false unless @@filepath
+                return false unless File.exists?(@@filepath)
+                return false unless File.readable?(@@filepath)
+                return false unless File.writable?(@@filepath)
+                return true
+            end
+            
+            def self.create_file
+                # create the restaurant file
+                File.open(@@filepath, 'w') unless file_exists?
+                return file_usable?
+            end
+            
+            def self.saved_restaurants
+                # We have to ask ourselves, do we want a fresh copy each 
+                # time or do we want to store the results in a variable?
+                restaurants = []
+                if file_usable?
+                    file = File.new(@@filepath, 'r')
+                    file.each_line do |line|
+                    restaurants << Restaurant.new.import_line(line.chomp)
+                    end
+                    file.close
+                end
+                return restaurants
+            end
+        
+            def self.build_using_questions
+                args = {}
+                print "Restaurant name: "
+                args[:name] = gets.chomp.strip
+            
+                print "Cuisine type: "
+                args[:cuisine] = gets.chomp.strip
+                
+                print "Average price: "
+                args[:price] = gets.chomp.strip
+                
+                return self.new(args)
+            end
+            
+            def initialize(args={})
+                @name    = args[:name]    || ""
+                @cuisine = args[:cuisine] || ""
+                @price   = args[:price]   || ""
+            end
+            
+            def import_line(line)
+                line_array = line.split("\t")
+                @name, @cuisine, @price = line_array
+                return self
+            end
+            
+            def save
+                return false unless Restaurant.file_usable?
+                File.open(@@filepath, 'a') do |file|
+                    file.puts "#{[@name, @cuisine, @price].join("\t")}\n"
+                end
+                return true
+            end
+            
+            def formatted_price
+                number_to_currency(@price)
+            end
+            
+        end
+        </div>
+        <span class="red">&#8226;</span> number_helper.rb:
+        <div class="code-wrapper indent01">
+        # This module illustrates how additional functionality can be 
+        # included (or "mixed-in") to a class and then reused.
+        # Borrows heavily from Ruby on Rails' number_to_currency method.
+        module NumberHelper
+            
+            def number_to_currency(number, options={})
+                unit      = options[:unit]      || '$'
+                precision = options[:precision] || 2
+                delimiter = options[:delimiter] || ','
+                separator = options[:separator] || '.'
+            
+                separator = '' if precision == 0
+                integer, decimal = number.to_s.split('.')
+            
+                i = integer.length
+                until i <= 3
+                    i -= 3
+                    integer = integer.insert(i,delimiter)
+                end
+                
+                if precision == 0
+                    precise_decimal = ''
+                else
+                    # make sure decimal is not nil
+                    decimal ||= "0"
+                    # make sure the decimal is not too large
+                    decimal = decimal[0, precision-1]
+                    # make sure the decimal is not too short
+                    precise_decimal = decimal.ljust(precision, "0")
+                end
+                
+                return unit + integer + separator + precise_decimal
+            end
+            
+        end   
+        </div>
+        <span class="red">&#8226;</span> string_extend.rb:
+        <div class="code-wrapper indent01">
+        # This helper is opening up core Ruby String class 
+        # in order to add a new method to all strings
+        class String
+            
+            # Ruby has a capitalize method (used below) which 
+            # capitalizes the first letter of a string. But in 
+            # order to capitalize the first letter of EVERY 
+            # word we have to write our own.
+            def titleize
+                self.split(' ').collect {|word| word.capitalize}.join(" ")
+            end
+            
+        end    
+        </div>
+    </div>
+</pre>

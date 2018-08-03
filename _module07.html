@@ -1,0 +1,108 @@
+<pre>
+    MODULES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Modules are wrappers around Ruby code
+        <span class="red">&#8226;</span> Modules can't be instantiated
+        <span class="red">&#8226;</span> Modules are used in conjunction with classes
+    </div>
+    NAMESPACES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Namespacing allows for class names that don't conflict
+        <span class="red">&#8226;</span> Namespacing can:        
+        <span class="green indent01">&#8226;</span> Keep class names distinct from standard Ruby classes
+        <span class="green indent01">&#8226;</span> Disambiguate your own class definitions
+        <span class="green indent01">&#8226;</span> Ensure classes used in open sourced code won't conflict
+    </div>
+    MIX-INS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Ruby only allows classes to inherit from one superclass
+        <span class="red">&#8226;</span> If additional functionality is needed, it can be placed into a module and mixed in
+        <hr>
+        <span class="red">&#8226;</span> Declaring a module:
+        <div class="code-wrapper indent01">
+        module ContactInfo
+            attr_accessor :first_name, :last_name, :city, :state, :zip_code
+        
+            def full_name
+                return @first_name + " " + @last_name
+            end
+            
+            def city_state_zip
+                csz = @city
+                csz += ", #{@state}" if @state
+                csz += " #{@zip_code}" if @zip_code
+                return csz
+            end
+        end
+        
+        class Person
+            include ContactInfo
+        end
+
+        <span class="shell-body class-shell">>> person = Person.new</span> 
+        <span class="shell-body class-shell">>> person.first_name = "John"</span> 
+        <span class="shell-body class-shell">>> person.last_name = "Doe"</span>
+        <span class="shell-body class-shell">>> person.full_name</span>
+        <span class="shell-body class-shell">=> "John Doe"</span>
+        </div>
+    </div>
+    LOAD, REQUIRE AND INCLUDE    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Modules are usually kept in separate files
+        <span class="red">&#8226;</span> Module files can serve as code libraries
+        <span class="red">&#8226;</span> Ways to load modules into Ruby
+        <span class="green indent01">&#8226;</span> load - loads a source file every time it is called
+        <span class="green indent01">&#8226;</span> require - loads a source file only once
+        <span class="green indent01">&#8226;</span> include - adds reference to a module inside a class; nothing to do with files
+        <hr>
+        <span class="red">&#8226;</span> Loading a module file into a class file:
+        <div class="code-wrapper indent01">
+        # file name = 'contact_info.rb'
+        module ContactInfo
+            attr_accessor :first_name, :last_name, :city, :state, :zip_code
+        
+            def full_name
+                return @first_name + " " + @last_name
+            end
+            
+            def city_state_zip
+                csz = @city
+                csz += ", #{@state}" if @state
+                csz += " #{@zip_code}" if @zip_code
+                return csz
+            end
+        end
+        </div>
+        <div class="code-wrapper indent01">
+        # file name = 'person.rb'
+        require 'contact_info.rb'
+        class Person
+            include ContactInfo
+        end
+        </div>
+    </div>
+    ENUMERABLE AS A MIX-IN    
+    <div class="sticky">
+        <span class="red">&#8226;</span> sort, detect, select, reject, collect, inject
+        <span class="red">&#8226;</span> Used on Arrays, Hashes, Ranges, Strings
+        <hr>
+        <span class="red">&#8226;</span> Using Enumerable as a mix-in:
+        <div class="code-wrapper indent01">
+        class ToDoList
+            include Enumerable
+            attr_accessor :items
+            def initialize
+                @items = []
+            end        
+            def each
+                @items.each {|item| yield item}
+            end        
+        end
+
+        <span class="shell-body class-shell">>> list = ToDoList.new</span> 
+        <span class="shell-body class-shell">>> list.items = ['laundry', 'dishes', 'vacuum']</span> 
+        <span class="shell-body class-shell">>> list.items.select {|i| i.length > 6 }</span>
+        <span class="shell-body class-shell">=> ["laundry"]</span>
+        </div>
+    </div>
+</pre>

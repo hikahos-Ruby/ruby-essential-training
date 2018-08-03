@@ -1,0 +1,119 @@
+<pre>
+    CONDITIONALS: IF, ELSE, ELSIF
+    <div class="sticky">
+        <span class="red">&#8226;</span> Structure of an if statement:
+        <div class="code-wrapper indent01">
+        if boolean_condition
+            a_set_of_instructions
+        elsif another_boolean_condition
+            another_set_of_instructions
+        else
+            default_set_of_instructions
+        end
+        </div>
+        <span class="red">&#8226;</span> Concise if statement:   
+        <span class="indent01">&#9;<span class="shell-body">>> name = "John"</span> <span class="shell-body">>> puts "This is true" if name == "John"</span> returns <span class="shell-body">=> This is true</span></span>    
+    </div>
+    CONDITIONALS: UNLESS, CASE
+    <div class="sticky">
+        <span class="red">&#8226;</span> Other conditionals:
+        <span class="green indent01">&#8226;</span> unless (equal to if !)
+        <div class="code-wrapper indent01">
+        unless boolean_condition
+            a_set_of_instructions
+        end
+        </div>
+        <span class="green indent01">&#8226;</span> case
+        <div class="code-wrapper indent01">
+        case
+        when boolean_condition
+        &#9;a_set_of_instructions
+        when another_boolean_condition
+        &#9;another_set_of_instructions
+        else
+        &#9;default_set_of_instructions
+        end
+        </div>
+        <span class="green indent01">&#8226;</span> ternary operator (if condition is true, return first value, otherwise return second value)
+        <div class="code-wrapper indent01">
+        boolean_condition ? value_if_true : value_if_false
+        </div>
+        <span class="green indent01">&#8226;</span> or operator (if variable has value, set it to that value, otherwise set it to another value)
+        <div class="code-wrapper indent01">
+        variable = value_if_true || value_if_false
+        </div>
+        <span class="green indent01">&#8226;</span> or-equals operator (if variable has no value, set a default value to it)
+        <div class="code-wrapper indent01">
+        variable ||= default_value
+        </div>
+    </div>
+    LOOPS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Structure of a loop:
+        <div class="code-wrapper indent01">
+        loop do
+            a_set_of_instructions
+            break if boolean_condition (exits loop)
+            next if boolean_condition (skips to the next loop)
+            another_set_of_instructions
+        end
+        </div>
+        <hr>
+        <span class="red">&#8226;</span> Loop controls:
+        <span class="green indent01">&#8226;</span> break = terminate the whole loop
+        <span class="green indent01">&#8226;</span> next = jump to the next loop
+        <span class="green indent01">&#8226;</span> redo = redo the loop
+        <span class="green indent01">&#8226;</span> retry = start the whole loop over  
+        <hr>
+        <span class="red">&#8226;</span> Other types of loop:
+        <span class="green indent01">&#8226;</span> while (similar logic to if)
+        <span class="green indent01">&#8226;</span> until (similar logic to unless)
+    </div>
+    ITERATORS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Iterators are loop methods
+        <span class="green indent01">&#8226;</span> times
+        <div class="code-wrapper indent02">
+        x = 5
+        x.times do |i|
+            print i.to_s + ":" + x.to_s + ","            
+        end
+    
+        returns <span class="shell-body">=> 0:5,1:5,2:5,3:5,4:5,</span>
+        </div>
+        <span class="green indent01">&#8226;</span> upto
+        <div class="code-wrapper indent02">
+        x = 1
+        x.upto(5) do |i|
+            print i.to_s + ":" + x.to_s + ","            
+        end
+    
+        returns <span class="shell-body">=> 1:1,2:1,3:1,4:1,5:1,</span>
+        </div>
+        <span class="green indent01">&#8226;</span> downto
+        <div class="code-wrapper indent02">
+        x = 5
+        x.downto(1) do |i|
+            print i.to_s + ":" + x.to_s + ","            
+        end
+    
+        returns <span class="shell-body">=> 5:5,4:5,3:5,2:5,1:5,</span>
+        </div>
+        <span class="green indent01">&#8226;</span> each
+        <div class="code-wrapper indent02">
+        x = 1..5
+        x.each do |i|
+            print i.to_s + ":" + x.to_s + ","            
+        end
+    
+        returns <span class="shell-body">=> 1:1..5,2:1..5,3:1..5,4:1..5,5:1..5,</span>
+        </div>
+        <hr>
+        <span class="red">&#8226;</span> Iterators available for each object type:
+        <span class="green indent01">&#8226;</span> Integers/floats: times, upto, downto, step
+        <span class="green indent01">&#8226;</span> Range: each, step
+        <span class="green indent01">&#8226;</span> String: each, each_line, each_byte
+        <span class="green indent01">&#8226;</span> Array: each, each_index, each_with_index 
+        <span class="green indent01">&#8226;</span> Hash: each, each_key, each_value, each_pair
+    </div>
+</pre>

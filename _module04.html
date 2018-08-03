@@ -1,0 +1,51 @@
+<pre>
+    WHAT IS A CODE BLOCK    
+    <div class="sticky">
+        <span class="red">&#8226;</span> A code block is a set of instructions that can be executed as a unit, such as a module, a class, or a function        
+        <span class="red">&#8226;</span> Common methods that use blocks:
+        <hr>
+        <span class="green indent01">&#8226;</span> find
+        <span class="blue indent02">&#8226;</span> find/detect
+        <span class="shell-body indent03">>> (1..10).find {|i| i % 3 == 0}</span> &#9;&#9;&#9;&#9;&#9; returns <span class="shell-body">=> 3</span>
+        <span class="blue indent02">&#8226;</span> find_all/select
+        <span class="shell-body indent03">>> (1..10).find_all {|i| i % 3 == 0}</span> &#9;&#9;&#9;&#9; returns <span class="shell-body">=> [3, 6, 9]</span>
+        <span class="blue indent02">&#8226;</span> any?
+        <span class="shell-body indent03">>> (1..10).any? {|i| i % 3 == 0}</span> &#9;&#9;&#9;&#9;&#9; returns <span class="shell-body">=> true</span>
+        <span class="blue indent02">&#8226;</span> all?
+        <span class="shell-body indent03">>> (1..10).all? {|i| i % 3 == 0}</span> &#9;&#9;&#9;&#9;&#9; returns <span class="shell-body">=> false</span>
+        <span class="blue indent02">&#8226;</span> delete_if
+        <span class="shell-body indent03">>> [*1..10].delete_if {|i| i % 3 == 0}</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 4, 5, 7, 8, 10]</span>
+        <hr>
+        <span class="green indent01">&#8226;</span> merge - used for hashes only
+        <div class="code-wrapper indent02">
+        hash1 = {"a"=>111, "b"=>222}
+        hash2 = {"b"=>333, "c"=>444}
+        hash1.merge(hash2)
+    
+        returns <span class="shell-body">=> {"a"=>111, "b"=>333, "c"=>444}</span>
+        </div>
+        <hr>
+        <span class="green indent01">&#8226;</span> collect/map - works best with arrays, hashes, ranges
+        <span class="shell-body indent03">>> ['cat','dog','bird'].collect {|i| i.capitalize}</span> &#9; returns <span class="shell-body">=> ["Cat", "Dog", "Bird"]</span>
+        <hr>
+        <span class="green indent01">&#8226;</span> sort - compares values using '<=>' operator; returned value is either -1 (less than), 0 (equal), or 1 (more than)
+        <span class="shell-body indent03">>> [3,1,5,2,4].sort {|val1,val2| val1 <=> val2}</span> &#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5]</span>
+        <hr>
+        <span class="green indent01">&#8226;</span> inject - accumulator, storing values in memo object
+        <div class="code-wrapper indent02">
+        array = [*1..10]
+        product = array.inject {|memo, n| memo * n}
+        returns <span class="shell-body">=> 7257600</span>
+        </div>
+        <hr>
+        <span class="red">&#8226;</span> Return value types:
+        <span class="green indent01">&#8226;</span> find/detect &#9; => Object or nil
+        <span class="green indent01">&#8226;</span> find_all/select &#9; => Array
+        <span class="green indent01">&#8226;</span> any? &#9;&#9;&#9; => Boolean
+        <span class="green indent01">&#8226;</span> all? &#9;&#9;&#9; => Boolean
+        <span class="green indent01">&#8226;</span> delete_if &#9;&#9; => Array
+        <span class="green indent01">&#8226;</span> merge &#9;&#9; => Hash
+        <span class="green indent01">&#8226;</span> collect/map &#9; => Array
+    </div>
+    
+</pre>

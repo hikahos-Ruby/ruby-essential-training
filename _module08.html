@@ -1,0 +1,182 @@
+<pre>
+    INPUT/OUTPUT BASICS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Input and output methods:
+        <span class="green indent01">&#8226;</span> gets: waits for user input--a single line ending in a return
+        <span class="blue indent02">&#8226;</span> chomp: removes any line ending ("\n", "\r", "\r\n")
+        <span class="blue indent02">&#8226;</span> chop: would remove ANY final character (chomp is usually better)
+        <span class="shell-body class-shell indent02">>> input = gets.chomp</span>
+        <span class="green indent01">&#8226;</span> print: outputs a string with no line return
+        <span class="green indent01">&#8226;</span> puts: outputs a string with a line return
+        <span class="shell-body class-shell indent02">>> print "You just told me: "</span>
+        <span class="shell-body class-shell indent02">>> puts input + "."</span>
+        <span class="green indent01">&#8226;</span> Use gets inside a loop for more user input
+        <span class="shell-body class-shell indent02">>> result = ""</span>
+        <span class="shell-body class-shell indent02">>> until result == "quit"</span>
+        <span class="shell-body class-shell indent02">>>    print "> "</span>
+        <span class="shell-body class-shell indent02">>>    result = gets.chomp</span>
+        <span class="shell-body class-shell indent02">>>    puts "I heard: #{result}"</span>
+        <span class="shell-body class-shell indent02">>> end</span>
+        <span class="shell-body class-shell indent02">>> puts "Goodbye!"</span>
+    </div>
+    FILE SYSTEM BASICS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> File path separators:
+        <span class="green indent01">&#8226;</span> Unix, Linux, MacOS path separator: /
+        <span class="green indent01">&#8226;</span> Windows path separator: \
+        <span class="red">&#8226;</span> Ruby's File.join('shared','lib','myfile.rb')
+        <span class="green indent01">&#8226;</span> Unix: shared/lib/myfile.rb
+        <span class="green indent01">&#8226;</span> Windows: shared\lib\myfile.rb
+        <span class="red">&#8226;</span> File permissions:
+        <span class="green indent01">&#8226;</span> Unix:
+        <span class="blue indent02">&#8226;</span> chmod - change permissions
+        <span class="blue indent02">&#8226;</span> chown - change owner
+        <span class="green indent01">&#8226;</span> Windows:
+        <span class="blue indent02">&#8226;</span> different permissions model than Unix
+        <span class="blue indent02">&#8226;</span> Managed through Properties/Security tab
+    </div>
+    FILE PATHS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Absolute path: /path/to/file
+        <span class="green indent01">&#8226;</span> Use forward slashes, even on Windows
+        <span class="shell-body indent02">>> puts "/Users/JohnDoe/Desktop/Ruby"</span>
+        <span class="green indent01">&#8226;</span> File.join ensures platform independence
+        <span class="shell-body indent02">>> puts File.join('', 'Users', 'JohnDoe', 'Desktop', 'Ruby')</span>
+        <span class="red">&#8226;</span> Relative path: ./../../path/to/file
+        <span class="green indent01">&#8226;</span> __FILE__ is THIS file
+        <span class="shell-body indent02">>> puts __FILE__</span>
+        <span class="green indent01">&#8226;</span> expand_path will convert a relative path to an absolute path
+        <span class="shell-body indent02">>> puts File.expand_path(__FILE__)</span>
+        <span class="green indent01">&#8226;</span> relative paths are easiest when you start with this file's directory
+        <span class="shell-body indent02">>> puts File.dirname(__FILE__)</span>
+        <span class="green indent01">&#8226;</span> .. "moves back" one directory
+        <span class="shell-body indent02">>> puts File.join(File.dirname(__FILE__), '..', "Exercise\ Files")</span>
+    </div>
+    ACCESSING FILES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Two ways to open files for reading/writing
+        <span class="green indent01">&#8226;</span> File.new - instantiate a file object, give it instructions
+        <span class="shell-body class-shell indent02">>> file = File.new('file1.txt', 'w')</span>
+        <span class="shell-body class-shell indent02">>> # write data to the file</span>
+        <span class="shell-body class-shell indent02">>> file.close</span>
+        <span class="green indent01">&#8226;</span> File.open - provide a file with a block of instructions
+        <span class="shell-body class-shell indent02">>> File.open('file1.txt', 'r') do |file|</span>
+        <span class="shell-body class-shell indent02">>> # read data from the file</span>
+        <span class="shell-body class-shell indent02">>> end</span>
+        <span class="green indent01">&#8226;</span> Second argument is the 'mode': r, w, a, r+, w+, a+
+        <span class="blue indent02">&#8226;</span> r - read from start (must exist)  <span class="blue indent02">&#8226;</span> r+ - read/write
+        <span class="blue indent02">&#8226;</span> w - truncate/write from start     <span class="blue indent02">&#8226;</span> w+ - read/write
+        <span class="blue indent02">&#8226;</span> a - append/write from end           <span class="blue indent02">&#8226;</span> a+ - read/write
+    </div>
+    WRITING TO FILES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> To write to a file, use the following methods: puts, print, write, <<        
+        <span class="shell-body class-shell indent02">>> file = File.new('file1.txt', 'w')</span>
+        <span class="shell-body class-shell indent02">>> file.puts "Ruby"</span>
+        <span class="shell-body class-shell indent02">>> file.print "programming"</span>
+        <span class="shell-body class-shell indent02">>> file.write "is"</span>
+        <span class="shell-body class-shell indent02">>> file << "fun"</span>
+        <span class="shell-body class-shell indent02">>> file.close</span>
+        <span class="indent02">output:</span>
+        <div class="code-wrapper indent02">
+        # file1.txt
+        Ruby
+        programming
+        is fun        
+        </div>        
+    </div>
+    READING FROM FILES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> To read from a file, use the gets method
+        <span class="shell-body class-shell indent02">>> File.open('file1.txt', 'r') do |file|</span>
+        <span class="shell-body class-shell indent02">>> while line = file.gets</span>
+        <span class="shell-body class-shell indent02">>> puts "** " + line.chomp.reverse + " **"</span>
+        <span class="shell-body class-shell indent02">>> end</span>
+        <span class="shell-body class-shell indent02">>> end</span>
+        <span class="indent02">output:</span>
+        <div class="code-wrapper indent02">
+        ** ybuR **
+        ** gnimmargorp **
+        ** nuf si **     
+        </div>  
+    </div>
+    FILE POINTER    
+    <div class="sticky">
+        <span class="red">&#8226;</span> The file pointer works like the cursor in a CLI: it overwrites text; it can also be used to read text from files
+        <span class="red">&#8226;</span> File pointer methods:
+        <span class="green indent01">&#8226;</span> file.pos - returns current pointer position
+        <span class="green indent01">&#8226;</span> file.pos = int - moves the pointer to the given position
+        <span class="green indent01">&#8226;</span> file.pos += int - increments the pointer position by the number provided
+        <span class="green indent01">&#8226;</span> file.pos += int - decrements the pointer position by the number provided
+        <span class="green indent01">&#8226;</span> file.read(int) - returns a number of characters from current position
+        <span class="green indent01">&#8226;</span> file.gets - returns all characters from current pointer position to the end of the line        
+        <span class="green indent01">&#8226;</span> file.eof? - returns true if end of file
+        <span class="green indent01">&#8226;</span> file.write 'text' - appends the given text to the end of the file
+        <span class="green indent01">&#8226;</span> file.rewind - returns pointer position to the start of the file
+        <span class="green indent01">&#8226;</span> file.pos - returns current pointer position
+    </div>
+    RENAMING AND DELETING FILES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Renaming a file:
+        <span class="green indent01">&#8226;</span> file.rename('curent_file_name', 'new_file_name')
+        <span class="red">&#8226;</span> Deleting a file:
+        <span class="green indent01">&#8226;</span> file.delete('file_name_to_delete')
+        <span class="red">&#8226;</span> Copying a file:
+        <span class="green indent01">&#8226;</span> require 'fileutils'
+        <span class="green indent01">&#8226;</span> FileUtils.copy('file_to_copy', 'copied_file')
+        <hr>
+        <span class="red">&#8226;</span> File
+        <span class="green indent01">&#8226;</span> rename
+        <span class="green indent01">&#8226;</span> delete, unlink
+        <span class="red">&#8226;</span> FileUtils
+        <span class="green indent01">&#8226;</span> Ruby Standard Library: require 'fileutils'
+        <span class="green indent01">&#8226;</span> cp, copy
+        <span class="green indent01">&#8226;</span> mv, move
+        <span class="green indent01">&#8226;</span> rm, remove
+        <span class="green indent01">&#8226;</span> cd, chmod, chown, pwd, ln, touch, mkdir, rmdir
+        <span class="red">&#8226;</span> FTools
+        <span class="green indent01">&#8226;</span> Ruby Standard Library: require 'ftools'
+        <span class="green indent01">&#8226;</span> Adds copy to File
+        <span class="green indent01">&#8226;</span> Better to use FileUtils
+        <span class="green indent01">&#8226;</span> Removed from Ruby Standard Library in Ruby 1.9
+    </div>
+    EXAMINING FILE DETAILS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Examining file details:
+        <span class="green indent01">&#8226;</span> File.exist?(file) - will return true for any type (e.g. directory)
+        <span class="green indent01">&#8226;</span> File.file?(file) - will return true for files
+        <span class="green indent01">&#8226;</span> File.directory?(file) - will return true for directories
+        <span class="green indent01">&#8226;</span> File.readable?(file) - will return true if file can be read
+        <span class="green indent01">&#8226;</span> File.writable?(file) - will return true if file can be written to
+        <span class="green indent01">&#8226;</span> File.executable?(file) - will return true if file can be executed (e.g. script files)
+        <span class="green indent01">&#8226;</span> File.size(file) # in bytes - will return file size in bytes
+        <span class="green indent01">&#8226;</span> File.dirname(file) - will return current directory of file
+        <span class="green indent01">&#8226;</span> File.expand_path(file) - will return the file's full path
+        <span class="green indent01">&#8226;</span> File.basename(file) - will return the file name
+        <span class="green indent01">&#8226;</span> File.extname(file) - will return the file extension
+        <span class="green indent01">&#8226;</span> File.atime(file) - will return the last accessed time
+        <span class="green indent01">&#8226;</span> File.mtime(file) - will return the last modified time
+        <span class="green indent01">&#8226;</span> File.ctime(file) - will return the last status change time
+        <span class="blue indent02">&#8226;</span> Read or write and change to owner, group, and permissions
+        <hr>
+        <span class="red">&#8226;</span> A file instance will not have access to the class methods of File
+        <span class="red">&#8226;</span> A file instance has an object called stat
+        <div class="code-wrapper indent01">
+        myfile = File.new(file, 'r')
+        myfile.stat.blksize
+        
+        returns <span class="shell-body">=> 4096</span>
+        </div>          
+    </div>
+    WORKING WITH DIRECTORIES   
+    <div class="sticky">
+        <span class="red">&#8226;</span> File.dirname(__FILE__) - returns current directory
+        <span class="red">&#8226;</span> File.expand_path(File.dirname(__FILE__)) - returns full path of the current file
+        <span class="red">&#8226;</span> Dir.pwd - print working directory
+        <span class="red">&#8226;</span> Dir.chdir('..') - move up one level
+        <span class="red">&#8226;</span> Dir.chdir(File.join('','Users','JohnDoe','Desktop','Ruby')) - navigate to the supplied directory
+        <span class="red">&#8226;</span> Dir.entries('.') - returns a string array of directory contents
+        <span class="red">&#8226;</span> Dir.mkdir('temp') - creates a directory
+        <span class="red">&#8226;</span> Dir.delete('temp') - delete a directory, if empty
+    </div>
+</pre>

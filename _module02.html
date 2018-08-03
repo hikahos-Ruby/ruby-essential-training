@@ -1,0 +1,154 @@
+<pre>
+    OBJECTS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Objects are instances of a class
+    </div>
+    OBJECT TYPES: VARIABLES
+    <div class="sticky">
+        <span class="red">&#8226;</span> Variables are not objects
+        <span class="red">&#8226;</span> Variables allow us to easily reference objects in Ruby
+        <span class="red">&#8226;</span> Variables will be undefined or act like an object
+        <hr>
+        <span class="red">&#8226;</span> Convention in declaring a variable:
+        <span class="green indent01">&#8226;</span> all lower-case letters; words separated by underscore <span class="shell-body">>> first_variable = 3.14</span>
+        <hr>
+        <span class="red">&#8226;</span> Variable scope indicators:
+        <span class="green indent01">&#8226;</span> Global &#9; $variable
+        <span class="green indent01">&#8226;</span> Class &#9;&#9; @@variable
+        <span class="green indent01">&#8226;</span> Instance &#9; @variable
+        <span class="green indent01">&#8226;</span> Local &#9;&#9; variable
+        <span class="green indent01">&#8226;</span> Block &#9;&#9; variable
+    </div>
+    OBJECT TYPES: NUMBERS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Integers - whole numbers; sub-classes: Fixnum, Bignum
+        <span class="red">&#8226;</span> Floats - decimal numbers
+        <hr>
+        <span class="red">&#8226;</span> Numbers class methods: e.g.  <span class="shell-body">>> x = 12345.6789</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> x.to_i</span> &#9; returns <span class="shell-body">=> 12345</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> x.round</span> &#9; returns <span class="shell-body">=> 12346</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> x.floor</span> &#9; returns <span class="shell-body">=> 12345</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> x.ceil</span> &#9; returns <span class="shell-body">=> 12346</span>
+    </div>
+    OBJECT TYPES: STRINGS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Sequences of characters; characters that are strung together
+        <hr>
+        <span class="red">&#8226;</span> Convention in declaring a string:
+        <span class="green indent01">&#8226;</span> double & single quotes <span class="shell-body">>> greeting = "Hello"</span> or <span class="shell-body">>> target = 'World'</span>
+        <span class="green indent01">&#8226;</span> '+' to concatenate <span class="shell-body">>> puts greeting + ' ' + target</span> returns <span class="shell-body">=> "Hello World"</span>
+        <span class="green indent01">&#8226;</span> double quotes allow string interpolation <span class="shell-body">>> puts "I want to say #{greeting} #{target}."</span> returns <span class="shell-body">=> I want to say Hello World.</span>
+        <hr>
+        <span class="red">&#8226;</span> Strings class methods: e.g.  <span class="shell-body">>> greeting = "hello"</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.reverse</span> &#9;&#9; returns <span class="shell-body">=> "olleh"</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.capitalize</span> &#9;&#9; returns <span class="shell-body">=> "Hello"</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.downcase</span> &#9;&#9; returns <span class="shell-body">=> "hello"</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.upcase</span> &#9;&#9;&#9; returns <span class="shell-body">=> "HELLO"</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.length</span> &#9;&#9;&#9; returns <span class="shell-body">=> 5</span>
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> greeting.reverse.upcase</span> &#9; returns <span class="shell-body">=> "OLLEH"</span>
+    </div>
+    OBJECT TYPES: ARRAYS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Array - an ordered, integer-indexed collection of objects   
+        <span class="red">&#8226;</span> Objects that can go in an array:
+        <span class="green indent01">&#8226;</span> Strings   
+        <span class="green indent01">&#8226;</span> Numbers
+        <span class="green indent01">&#8226;</span> Other arrays
+        <span class="green indent01">&#8226;</span> Mixed types  
+        <hr>
+        <span class="red">&#8226;</span> Array operations: e.g.  <span class="shell-body">>> data_set = []</span>
+        <span class="green indent01">&#8226;</span> assigning items to the array &#9;<span class="shell-body">>> data_set = ["a","b","c"]</span> &#9; returns <span class="shell-body">=> ["a", "b", "c"]</span>
+        <span class="green indent01">&#8226;</span> selecting an item by its index &#9;<span class="shell-body">>> data_set[2]</span> &#9;&#9;&#9; returns <span class="shell-body">=> ["c"]</span>
+        <span class="green indent01">&#8226;</span> replacing an item in the array &#9;<span class="shell-body">>> data_set[0] = "d"</span> &#9;&#9; returns <span class="shell-body">=> ["d", "b", "c"]</span>
+        <span class="green indent01">&#8226;</span> appending an item to the array &#9;<span class="shell-body">>> data_set << "e"</span> &#9;&#9; returns <span class="shell-body">=> ["d", "b", "c", "e"]</span>
+        <span class="green indent01">&#8226;</span> deleting an item in the array &#9;<span class="shell-body">>> data_set[1] = nil</span> &#9;&#9; returns <span class="shell-body">=> ["d", nil, "c", "e"]</span>
+        <span class="green indent01">&#8226;</span> clearing the array &#9;&#9;&#9;<span class="shell-body">>> data_set.clear</span> &#9;&#9;&#9; returns <span class="shell-body">=> []</span>
+        <hr>
+        <span class="red">&#8226;</span> Array methods: e.g.  <span class="shell-body">>> array = [1,2,3,4,5]</span>
+        <span class="green indent01">&#8226;</span> inspecting the array &#9;&#9;&#9;<span class="shell-body">>> array.inspect</span> &#9;&#9;&#9; returns <span class="shell-body">=> "[1, 2, 3, 4, 5]"</span>
+        <span class="green indent01">&#8226;</span> converting to string &#9;&#9;&#9;<span class="shell-body">>> array.to_s</span> &#9;&#9;&#9; returns <span class="shell-body">=> "[1, 2, 3, 4, 5]"</span>
+        <span class="green indent01">&#8226;</span> joining the array &#9;&#9;&#9;<span class="shell-body">>> array.join(", ")</span> &#9;&#9; returns <span class="shell-body">=> "1, 2, 3, 4, 5"</span>
+        <span class="green indent01">&#8226;</span> splitting a string into an array &#9;<span class="shell-body">>> ("1,2,3,4,5").split(",")</span> &#9; returns <span class="shell-body">=> ["1", "2", "3", "4", "5"]</span>
+        <span class="green indent01">&#8226;</span> reversing the array &#9;&#9;&#9;<span class="shell-body">>> array.reverse</span> &#9;&#9;&#9; returns <span class="shell-body">=> [5, 4, 3, 2, 1]</span>
+        <span class="green indent01">&#8226;</span> appending to the array &#9;&#9;<span class="shell-body">>> array << 5</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5, 5]</span>
+        <span class="green indent01">&#8226;</span> appending to the array &#9;&#9;<span class="shell-body">>> array.push(5)</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5, 5, 5]</span>
+        <span class="green indent01">&#8226;</span> sorting the array &#9;&#9;&#9;<span class="shell-body">>> array.sort</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5, 5, 5]</span>
+        <span class="green indent01">&#8226;</span> returning unique values &#9;&#9;<span class="shell-body">>> array.uniq</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5]</span>
+        <span class="green indent01">&#8226;</span> persisting uniqueness &#9;&#9;<span class="shell-body">>> array.uniq!</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5]</span>
+        <span class="green indent01">&#8226;</span> deleting an item by index &#9;&#9;<span class="shell-body">>> array.delete_at(2)</span> &#9;&#9; returns <span class="shell-body">=> [1, 2, 4, 5]</span>
+        <span class="green indent01">&#8226;</span> deleting an item by value &#9;&#9;<span class="shell-body">>> array.delete(2)</span> &#9;&#9; returns <span class="shell-body">=> [1, 4, 5]</span>
+        <span class="green indent01">&#8226;</span> removing last item &#9;&#9;&#9;<span class="shell-body">>> array.pop</span> &#9;&#9;&#9;&#9; returns <span class="shell-body">=> [1, 4]</span>
+        <span class="green indent01">&#8226;</span> removing first item &#9;&#9;&#9;<span class="shell-body">>> array.shift</span> &#9;&#9;&#9; returns <span class="shell-body">=> [4]</span>
+        <span class="green indent01">&#8226;</span> undoing shift &#9;&#9;&#9;&#9;<span class="shell-body">>> array.unshift(1)</span> &#9;&#9; returns <span class="shell-body">=> [1, 4]</span>
+        <span class="green indent01">&#8226;</span> concatenating arrays &#9;&#9;&#9;<span class="shell-body">>> array + [9,10,11,12]</span> &#9; returns <span class="shell-body">=> [1, 4, 9, 10, 11, 12]</span>
+        <span class="green indent01">&#8226;</span> deducting arrays &#9;&#9;&#9;<span class="shell-body">>> array - [9,10]</span> &#9;&#9;&#9; returns <span class="shell-body">=> [1, 4, 11, 12]</span>
+    </div>
+    OBJECT TYPES: HASHES
+    <div class="sticky">
+        <span class="red">&#8226;</span> Hash - unordered, object-indexed collection of objects (or key-value pairs)
+        <span class="red">&#8226;</span> Arrays vs. Hashes:
+        <span class="green indent01">&#8226;</span> Use arrays when the order matters
+        <span class="green indent01">&#8226;</span> Use hashes when the label matters
+        <hr>
+        <span class="red">&#8226;</span> Hash operations: e.g.  <span class="shell-body">>> person = {'first_name' => 'John', 'last_name' => 'Doe'}</span>
+        <span class="green indent01">&#8226;</span> retrieving a value by key &#9;&#9;<span class="shell-body">>> person['first_name']</span> &#9; returns <span class="shell-body">=> "John"</span>
+        <span class="green indent01">&#8226;</span> retrieving a key by value &#9;&#9;<span class="shell-body">>> person.index('Doe')</span> &#9;&#9; returns <span class="shell-body">=> "last_name"</span>
+        <span class="green indent01">&#8226;</span> retrieve all keys &#9;&#9;&#9;<span class="shell-body">>> person.keys</span> &#9;&#9;&#9; returns <span class="shell-body">=> ["first_name", "last_name"]</span>
+        <span class="green indent01">&#8226;</span> retrieve all values &#9;&#9;&#9;<span class="shell-body">>> person.values</span> &#9;&#9;&#9; returns <span class="shell-body">=> ["John", "Doe"]</span>
+        <span class="green indent01">&#8226;</span> converting to an array &#9;&#9;<span class="shell-body">>> person.to_a</span> &#9;&#9;&#9; returns <span class="shell-body">=> [["first_name", "John"], ["last_name", "Doe"]]</span>
+        <span class="green indent01">&#8226;</span> clearing the hash &#9;&#9;&#9;<span class="shell-body">>> person.clear</span> &#9;&#9;&#9; returns <span class="shell-body">=> {}}</span>
+        <span class="green indent01">&#8226;</span> appending a key-value &#9;&#9;<span class="shell-body">>> person['gender'] = 'male'</span>  returns <span class="shell-body">=> {"first_name"=>"John", "last_name"=>"Doe", "gender"=>"male"}</span>
+    </div>
+    OBJECT TYPES: SYMBOLS
+    <div class="sticky">
+        <span class="red">&#8226;</span> A symbol is a label used to identify a piece of data
+        <span class="red">&#8226;</span> A symbol is only stored in memory one time
+        <span class="red">&#8226;</span> Usage of symbols:
+        <span class="green indent01">&#8226;</span> <span class="shell-body">>> hash = {:first_name => 'John', :last_name => 'Doe'}</span> &#9; returns <span class="shell-body">=> {:first_name=>"John", :last_name=>"Doe"}</span>
+    </div>
+    OBJECT TYPES: BOOLEANS
+    <div class="sticky">
+        <span class="red">&#8226;</span> TRUE / FALSE
+        <hr>
+        <span class="red">&#8226;</span> Boolean comparison & logic operators:
+        <span class="green indent01">&#8226;</span> Equal &#9;&#9;&#9;&#9;&#9; ==
+        <span class="green indent01">&#8226;</span> Less than &#9;&#9;&#9;&#9; <
+        <span class="green indent01">&#8226;</span> Greater than &#9;&#9;&#9; >
+        <span class="green indent01">&#8226;</span> Less than or equal to &#9;&#9; <=
+        <span class="green indent01">&#8226;</span> Greater than or equal to &#9; >=
+        <span class="green indent01">&#8226;</span> Not &#9;&#9;&#9;&#9;&#9; !
+        <span class="green indent01">&#8226;</span> Not equal &#9;&#9;&#9;&#9; !=
+        <span class="green indent01">&#8226;</span> And &#9;&#9;&#9;&#9;&#9; &&
+        <span class="green indent01">&#8226;</span> Or &#9;&#9;&#9;&#9;&#9; ||
+        <hr>
+        <span class="red">&#8226;</span> Boolean operations: 
+        <span class="green indent01">&#8226;</span> is value nil? &#9;&#9;&#9;&#9;<span class="shell-body">>> z = nil</span> <span class="shell-body">>> z.nil?</span> &#9;&#9;&#9;&#9;&#9;&#9; returns <span class="shell-body">=> true</span>
+        <span class="green indent01">&#8226;</span> is value between 2 numbers? &#9;<span class="shell-body">>> z = 2</span> <span class="shell-body">>> z.between?(1,4)</span> &#9;&#9;&#9;&#9; returns <span class="shell-body">=> true</span>
+        <span class="green indent01">&#8226;</span> is array empty? &#9;&#9;&#9;&#9;<span class="shell-body">>> z = [1,2,3]</span> <span class="shell-body">>> z.empty?</span> &#9;&#9;&#9;&#9;&#9; returns <span class="shell-body">=> false</span>
+        <span class="green indent01">&#8226;</span> does array include a value? &#9;<span class="shell-body">>> z = [1,2,3]</span> <span class="shell-body">>> z.include?(5)</span> &#9;&#9;&#9;&#9; returns <span class="shell-body">=> false</span>
+        <span class="green indent01">&#8226;</span> does hash contain a key? &#9;&#9;<span class="shell-body">>> z = {'a' => 1, 'b' => 2}</span> <span class="shell-body">>> z.has_key?('a')</span> &#9; returns <span class="shell-body">=> true</span>
+        <span class="green indent01">&#8226;</span> does hash contain a value? &#9;<span class="shell-body">>> z = {'a' => 1, 'b' => 2}</span> <span class="shell-body">>> z.has_value?(2)</span> &#9; returns <span class="shell-body">=> true</span>
+    </div>
+    OBJECT TYPES: RANGES
+    <div class="sticky">
+        <span class="red">&#8226;</span> An array specifying only the endpoints
+        <hr>
+        <span class="red">&#8226;</span> Types of ranges:
+        <span class="green indent01">&#8226;</span> Inclusive &#9;<span class="shell-body">>> range = (1..10)</span> <span class="shell-body"> => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span>
+        <span class="green indent01">&#8226;</span> Exclusive &#9;<span class="shell-body">>> range = (1...10)</span> <span class="shell-body"> => [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+        <hr>
+        <span class="red">&#8226;</span> Range operations: e.g. <span class="shell-body">>> y = 1..10</span>
+        <span class="green indent01">&#8226;</span> get first value (first or begin) &#9;&#9;<span class="shell-body">>> y.first</span> &#9; returns <span class="shell-body">=> 1</span>
+        <span class="green indent01">&#8226;</span> get last value (last or end) &#9;&#9;<span class="shell-body">>> y.end</span> &#9; returns <span class="shell-body">=> 10</span>
+        <span class="green indent01">&#8226;</span> expand the range (splat operator: *) &#9;<span class="shell-body">>> [*y]</span> &#9;&#9; returns <span class="shell-body">=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span>
+    </div>
+    OBJECT TYPES: CONSTANTS
+    <div class="sticky">
+        <span class="red">&#8226;</span> Constants are similar to variables        
+        <span class="green indent01">&#8226;</span> Not true objects
+        <span class="green indent01">&#8226;</span> Point to objects
+        <span class="red">&#8226;</span> Constants are different from variables        
+        <span class="green indent01">&#8226;</span> Re-setting a constant's value issues a warning, but is allowed anyway
+        <span class="red">&#8226;</span> To initialize a constant, the name must start with an uppercase letter
+    </div>
+</pre>

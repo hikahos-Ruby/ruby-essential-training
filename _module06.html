@@ -1,0 +1,286 @@
+<pre>
+    DEFINING AND USING CLASSES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Classes define:        
+        <span class="green indent01">&#8226;</span> What an object is
+        <span class="green indent01">&#8226;</span> What an object can do
+        <span class="red">&#8226;</span> Class names start with an uppercase letter
+        <span class="red">&#8226;</span> Classes organize code into well-categorized areas
+        <span class="red">&#8226;</span> Classes "carry around" their class's code
+        <span class="red">&#8226;</span> Classes allow complex behaviors using simple statements
+        <span class="red">&#8226;</span> Classes correspond to real-world objects
+        <hr>
+        <span class="red">&#8226;</span> Declaring a class:
+        <div class="code-wrapper indent01">
+        class Animal
+            def make_noise
+                "Moo!"            
+            end            
+        end
+
+        <span class="shell-body class-shell">>> animal = Animal.new</span> 
+        <span class="shell-body class-shell">>> animal.make_noise</span> 
+        <span class="shell-body class-shell">=> "Moo!"</span>
+        </div> 
+        <hr>
+        <span class="red">&#8226;</span> Command to uninitialize a class:
+        <span class="shell-body indent01">>> Object.send(:remove_const, :Animal)</span>
+    </div>
+    CLASS INSTANCES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> A class instance is an object created from a class 
+    </div>
+    CLASS INSTANCE ATTRIBUTES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> A class instance attribute is a value that persists inside of an instance
+        <span class="red">&#8226;</span> An instance variable (@variable) is used to store the attributes inside an instance
+        <hr>
+        <span class="red">&#8226;</span> Instance variable in a class:
+        <div class="code-wrapper indent01">
+        class Animal
+            def set_noise(noise)
+                @noise = noise            
+            end 
+            def get_noise
+                @noise            
+            end            
+        end
+
+        <span class="shell-body class-shell">>> animal = Animal.new</span> 
+        <span class="shell-body class-shell">>> animal.set_noise("Quack!")</span> 
+        <span class="shell-body class-shell">>> animal.make_noise</span> 
+        <span class="shell-body class-shell">=> "Quack!"</span>
+        </div> 
+    </div>
+    READER/WRITER METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Also known as getter/setter methods in other languages
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with reader/writer methods:
+        <div class="code-wrapper indent01">
+        class Animal
+            def noise=(noise)
+                @noise = noise            
+            end 
+            def noise
+                @noise            
+            end            
+        end
+
+        <span class="shell-body class-shell">>> animal = Animal.new</span> 
+        <span class="shell-body class-shell">>> animal.noise ="Quack!"</span> 
+        <span class="shell-body class-shell">>> animal.noise</span> 
+        <span class="shell-body class-shell">=> "Quack!"</span>
+        </div> 
+    </div>
+    ATTRIBUTE METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> attr_reader, attr_writer, attr_accessor
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with attr_accessor method:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise            
+        end
+
+        <span class="shell-body class-shell">>> animal = Animal.new</span> 
+        <span class="shell-body class-shell">>> animal.noise ="Quack!"</span> 
+        <span class="shell-body class-shell">>> animal.noise</span> 
+        <span class="shell-body class-shell">=> "Quack!"</span>
+        </div> 
+    </div>
+    INITIALIZE METHOD    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Initialize method can contain default values and default methods that run immediately
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with initialize method:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise   
+            def initialize(noise)
+                puts "A new animal has been instantiated."
+                @noise = noise
+            end 
+        end
+
+        <span class="shell-body class-shell">>> animal = Animal.new("Meow!")</span> 
+        <span class="shell-body class-shell">>> animal.noise</span> 
+        <span class="shell-body class-shell">=> "Meow!"</span>
+        </div> 
+    </div>
+    CLASS METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Class method is a method than can be called on a class, even without an instance of the class
+        <span class="red">&#8226;</span> To create a class method, a method needs the keyword 'self.' prefixing the method name
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with a class method:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise   
+            def self.all_species
+                ['cat', 'cow', 'dog', 'duck', 'horse', 'pig']
+            end
+            def initialize(noise)
+                puts "A new animal has been instantiated."
+                @noise = noise
+            end 
+        end
+
+        <span class="shell-body class-shell">>> Animal.all_species</span> 
+        <span class="shell-body class-shell">=> ["cat", "cow", "dog", "duck", "horse", "pig"]</span>
+        </div> 
+    </div>
+    CLASS ATTRIBUTES    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Class attributes store values that apply to the class generally
+        <span class="red">&#8226;</span> A class attribute needs the '@@'prefix to the name
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with a class attribute:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise  
+            @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig'] 
+            def self.all_species
+                @@species
+            end
+            def initialize(noise)
+                puts "A new animal has been instantiated."
+                @noise = noise
+            end 
+        end
+
+        <span class="shell-body class-shell">>> Animal.all_species</span> 
+        <span class="shell-body class-shell">=> ["cat", "cow", "dog", "duck", "horse", "pig"]</span>
+        </div> 
+    </div>
+    CLASS READER/WRITER METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Class reader/writer methods have to be created
+        <hr>
+        <span class="red">&#8226;</span> Refactoring the class with class reader/writer methods:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise  
+            @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig'] 
+            def self.species
+                @@species
+            end
+            def self.species=(array=[])
+                @@species = array
+            end
+            def initialize(noise)
+                puts "A new animal has been instantiated."
+                @noise = noise
+            end 
+        end
+
+        <span class="shell-body class-shell">>> Animal.species = ['frog', 'fish']</span> 
+        <span class="shell-body class-shell">=> ["frog", "fish"]</span>
+        </div> 
+    </div>
+    CLASS INHERITANCE    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Class inheritance is the bestowal of methods and attributes of another class
+        <span class="red">&#8226;</span> In Ruby, the parent class is called a superclass, and the child class is called a subclass
+        <span class="red">&#8226;</span> In Ruby, only one class can be inherited
+        <hr>
+        <span class="red">&#8226;</span> Adding a subclass:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise  
+            @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig'] 
+            def self.species
+                @@species
+            end
+            def self.species=(array=[])
+                @@species = array
+            end
+            def initialize(noise)
+                puts "A new animal has been instantiated."
+                @noise = noise            
+            end 
+        end
+
+        class Cow < Animal
+        end
+
+        <span class="shell-body class-shell">>> Clarabelle = Cow.new("Moo!")</span> 
+        <span class="shell-body class-shell">>> Clarabelle.noise</span>
+        <span class="shell-body class-shell">=> "Moo!"</span>
+        </div> 
+    </div>
+    SUBCLASS OVERRIDING    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Class inheritance is the bestowal of methods and attributes of another class
+        <span class="red">&#8226;</span> In Ruby, the parent class is called a superclass, and the child class is called a subclass
+        <span class="red">&#8226;</span> In Ruby, only one class can be inherited
+        <hr>
+        <span class="red">&#8226;</span> Overriding with a subclass:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise, :color  
+            @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig'] 
+            def self.species
+                @@species
+            end
+            def self.species=(array=[])
+                @@species = array
+            end
+            def initialize(noise, color)
+                puts "A new animal has been instantiated."
+                @noise = noise
+                @color = color
+            end 
+        end
+
+        class Cow < Animal
+            def color
+                "The cow's color is #{@color}."
+            end
+        end
+
+        <span class="shell-body class-shell">>> Clarabelle = Cow.new("Moo!")</span> 
+        <span class="shell-body class-shell">>> Clarabelle.noise   => "Moo!"</span>
+        <span class="shell-body class-shell">>> Clarabelle.color   => "The cow's color is yellow."</span>
+        </div> 
+    </div>
+    ACCESSING THE SUPERCLASS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Access the method in the superclass by using keyword 'super'
+        <hr>
+        <span class="red">&#8226;</span> Overriding with a subclass:
+        <div class="code-wrapper indent01">
+        class Animal
+            attr_accessor :noise, :color  
+            @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig'] 
+            def self.species
+                @@species
+            end
+            def self.species=(array=[])
+                @@species = array
+            end
+            def initialize(noise, color)
+                puts "A new animal has been instantiated."
+                @noise = noise
+                @color = color
+            end 
+        end
+
+        class Cow < Animal
+            def color
+                "The cow's color is #{@color}."
+            end
+        end
+
+        class Pig < Animal
+            def noise
+                super
+            end
+        end
+
+        <span class="shell-body class-shell">>> Wilbur = Pig.new("Oink!","pink")</span> 
+        <span class="shell-body class-shell">>> Wilbur.noise   => "Oink!"</span>
+        <span class="shell-body class-shell">>> Wilbur.color   => "pink"</span>
+        </div> 
+    </div>
+</pre>

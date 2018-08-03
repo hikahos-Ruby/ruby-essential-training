@@ -1,0 +1,107 @@
+<pre>
+    DEFINING AND CALLING METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Declaring a method:
+        <div class="code-wrapper indent01">
+        def longest_word
+            words = ['apple','pear','banana','plum']
+            l_word = words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end
+            puts l_word
+        end
+
+        <span class="shell-body">>> longest_word</span> &#9; returns <span class="shell-body">=> banana</span>
+        </div>
+        <hr>
+        <span class="red">&#8226;</span> Common convention for methods:
+        <span class="green indent01">&#8226;</span> Underscore between words, like variable names
+        <span class="green indent01">&#8226;</span> Method names can have ? - useful for tests and booleans
+        <span class="green indent01">&#8226;</span> Methods must be defined before calling them
+    </div>
+    VARIABLE SCOPE IN METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Instance variable in a method:
+        <div class="code-wrapper indent01">
+        @words = ['apple','pear','banana','plum']
+        def longest_word            
+            l_word = @words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end
+            puts l_word
+        end
+
+        <span class="shell-body">>> longest_word</span> &#9; returns <span class="shell-body">=> banana</span>
+        </div>        
+    </div>
+    ARGUMENTS IN METHODS    
+    <div class="sticky">
+        <span class="red">&#8226;</span> Arguments are a comma-separated list of values that are passed into methods
+        <span class="red">&#8226;</span> Parameters are the variables in the method signature
+        <hr>
+        <span class="red">&#8226;</span> Common convention for arguments in methods:
+        <span class="green indent01">&#8226;</span> Methods with arguments typically use parentheses
+        <span class="green indent01">&#8226;</span> Methods without arguments typically do not
+        <span class="green indent01">&#8226;</span> Parentheses are optional in both cases
+        <hr>
+        <span class="red">&#8226;</span> Passing argument to the method:
+        <div class="code-wrapper indent01">
+        fruits = ['apple','pear','banana','plum']
+        def longest_word(words)           
+            l_word = words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end
+            puts l_word
+        end
+
+        <span class="shell-body">>> longest_word(words)</span> returns <span class="shell-body">=> banana</span>
+        </div>
+    </div>
+    ARGUMENT DEFAULT VALUES    
+    <div class="sticky">        
+        <span class="red">&#8226;</span> Default argument values in methods:        
+        <div class="code-wrapper indent01">            
+        def longest_word(words=['pomegranate'])                      
+            l_word = words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end            
+            puts l_word
+        end
+
+        <span class="shell-body">>> longest_word</span> returns <span class="shell-body">=> pomegranate</span>
+        </div>
+    </div>
+    RETURN VALUES    
+    <div class="sticky">        
+        <span class="red">&#8226;</span> Return values in methods:        
+        <div class="code-wrapper indent01">            
+        def longest_word(words=['pomegranate'])                      
+            return l_word = words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end  
+        end
+
+        <span class="shell-body">>> value = longest_word</span> returns <span class="shell-body">=> "pomegranate"</span>
+        </div>
+        <hr>
+        <span class="red">&#8226;</span> keyword return doesn't have to be at the end and there can be more than one
+        <span class="red">&#8226;</span> only one value is returned from a method, unless the return value is an array
+        <div class="code-wrapper indent01">            
+        def long_short(words=['pomegranate','fig'])                      
+            long = words.inject do |memo,word|
+                memo.length > word.length ? memo : word
+            end  
+            short = words.inject do |memo,word|
+                memo.length < word.length ? memo : word
+            end
+            return [long, short]
+        end
+
+        <span class="shell-body">>> value = longest_word</span> returns <span class="shell-body">=> ["pomegranate", "fig"]</span>
+        </div>        
+    </div>
+    OPERATORS ARE ALSO METHODS    
+    <div class="sticky">        
+        <span class="red">&#8226;</span> Syntactic sugar - Ruby abstracts the methods for ease of use 
+    </div>
+</pre>
