@@ -1,52 +1,31 @@
-/*
-legend {
-    font-size: 16px;
-    border: 1px solid black;
-    padding: 5px;
-    background-color: orange;
-    cursor: pointer;
-}	
-fieldset {
-    border: 1px solid #dcdc;
-    line-height: 1.4;
-}
-fieldset.subFieldset {
-    height: 325px; 
-    background-color: azure;     
-}		
-fieldset.subFieldset:hover {
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    -o-box-shadow: 0 8px 6px -6px black;
-    -ms-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;     
-}
-*/
-.panel-title {
+.panel-heading {
     -webkit-transition: 0.2s ease-in-out;
     -moz-transition: 0.2s ease-in-out;
     -o-transition: 0.2s ease-in-out;
     -ms-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
-    cursor: pointer;
+    cursor: pointer;    
 }
-.panel-title:hover {
-    background-color: rgb(255, 0, 0);	    
+.panel-heading:hover {
+    background-color: rgb(0, 0, 0);	
+    color:rgb(255,255,255);    
     -webkit-transform: scale(1.01);
     -moz-transform: scale(1.01);
     -o-transform: scale(1.01);
     -ms-transform: scale(1.01);
     transform: scale(1.01);	 
 }
-i {
+i, span.green {
     color: #00ff00; /* green */
+    line-height: 2;
 }
 span.blue {
-    color: #0000ff; /* blue	*/			
+    color: #0000ff; /* blue	*/	
+    line-height: 2;		
 }
 span.red {
     color: #ff0000; /* red	*/	
-    line-height: 2.3;		
+    line-height: 2;		
 }
 div.lesson {
     min-width: 400px; 
@@ -66,21 +45,6 @@ div.lesson:hover {
     -o-transform: scale(1.01);
     -ms-transform: scale(1.01);
     transform: scale(1.01);	    
-}
-button#home {
-    width: 100px;
-    height: 30px;
-    margin: 10px 0 5px 15px;
-}
-button#home:hover {
-    background-color: #000;	
-    color: #fff;	
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);	
-    cursor: pointer;
 }
 /* styles for individual pages */
 .indent01 {
@@ -111,6 +75,7 @@ button#home:hover {
     display: inline-block;
     width: 250px;
 }
+/* mac terminal style */
 .shell-body {
     /* margin: 0; */
     padding: 5px;
@@ -127,13 +92,40 @@ button#home:hover {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+.class-shell {
+    display: inline-block;
+    width: 340px;
+    -webkit-border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+/* command prompt style */
+.command-prompt-body {
+    /* margin: 0; */
+    padding: 5px;
+    list-style: none;
+    background: #141414;
+    color: #ffffff;
+    font: 0.8em 'Courier New';
+    line-height: 1.6em;
+  
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
 .sticky {
     /* position: absolute; */
     /* right: 0; */
     z-index: 150;
     /* transform: rotate(5deg); */
     /* width: 200px; */
-    min-height: 150px;
+    /* min-height: 150px; */
     margin: -10px 10px 10px;
     /* padding: 10px; */
     font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive;
@@ -141,4 +133,28 @@ button#home:hover {
     color: #000;
     background: rgba(255, 255, 51, 0.8);
     box-shadow: -2px 2px 2px rgba(0,0,0,0.3);
+}
+hr {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+.code-wrapper {
+    border: 1px solid darkgrey;
+    padding-right: 30px;    
+    display: inline-block;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -10px 0;
+}
+.logo {
+    width: 200px;
+}
+.heading-name {
+    margin-left: -20px;
+    font-size: 27px;
 }
